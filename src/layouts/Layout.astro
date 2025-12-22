@@ -1,0 +1,59 @@
+---
+import "../styles/global.css";
+import TopBar from "../components/layouts/TopBar.astro";
+import Footer from "../components/layouts/Footer.astro";
+import { menuItems } from "../constants/navigation";
+
+interface Props {
+    title?: string;
+    description?: string;
+    image?: string;
+    canonicalURL?: string;
+}
+
+const {
+    title = "BuskaTech - Compara y solicita productos financieros",
+    description = "Encuentra las mejores tasas de interés en préstamos, hipotecas y tarjetas en Panamá. Compara ofertas personalizadas en segundos.",
+    image = "/og-image.jpg",
+    canonicalURL = Astro.url.href,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <link rel="icon" type="image/ico" href="/logo_v1.ico" />
+        <meta name="generator" content={Astro.generator} />
+
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <link rel="canonical" href={canonicalURL} />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={canonicalURL} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={new URL(image, Astro.url)} />
+
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content={canonicalURL} />
+        <meta property="twitter:title" content={title} />
+        <meta property="twitter:description" content={description} />
+        <meta property="twitter:image" content={new URL(image, Astro.url)} />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    </head>
+    <body class="bg-gray-50 text-gray-900 selection:bg-brand-yellow selection:text-brand-blue">
+        <div class="min-h-screen flex flex-col">
+            <TopBar links={menuItems} />
+            <main class="flex-grow">
+                <slot />
+            </main>
+            <Footer links={menuItems} />
+        </div>
+    </body>
+</html>

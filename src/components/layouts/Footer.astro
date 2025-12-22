@@ -1,0 +1,51 @@
+---
+interface Props {
+    links: Array<{ title: string; url: string }>;
+}
+
+const { links } = Astro.props;
+---
+
+<footer class="bg-gray-900 text-white py-12 border-t-4 border-brand-yellow mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-3 gap-12">
+            <div>
+                <span class="text-2xl font-bold tracking-wider block mb-4">
+                    BUSKA<span class="text-brand-yellow">TECH</span>
+                </span>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    Simplificando tus decisiones financieras mediante tecnología, algoritmos avanzados y total transparencia.
+                </p>
+            </div>
+            
+            <div>
+                <h4 class="font-bold mb-4 text-lg text-white">Enlaces Rápidos</h4>
+                <ul class="space-y-2">
+                    {links.map(link => (
+                        <li>
+                            <a href={link.url} class="text-gray-400 hover:text-brand-yellow transition-colors text-sm">
+                                {link.title}
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-bold mb-4 text-lg">Contacto</h4>
+                <div class="text-gray-400 text-sm space-y-2">
+                    <p class="flex items-center gap-2">
+                        <span class="text-brand-yellow">✉</span> info@buskatech.com
+                    </p>
+                    <p class="flex items-center gap-2">
+                        <span class="text-brand-yellow">📍</span> Ciudad de Panamá, Panamá
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-12 pt-8 border-t border-gray-800 text-center text-gray-500 text-xs uppercase tracking-widest">
+            © {new Date().getFullYear()} BuskaTech. Todos los derechos reservados.
+        </div>
+    </div>
+</footer>

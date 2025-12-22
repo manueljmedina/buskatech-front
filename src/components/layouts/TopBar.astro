@@ -1,0 +1,66 @@
+---
+import { Image } from "astro:assets";
+import logo from "../../assets/images/logo.jpg";
+
+interface Props {
+    links: Array<{ title: string; url: string }>;
+}
+
+const { links } = Astro.props;
+const currentPath = Astro.url.pathname;
+
+const isLinkActive = (url: string) => 
+    url === "/" ? currentPath === "/" : currentPath.startsWith(url);
+---
+
+<nav class="bg-brand-blue/95 backdrop-blur sticky top-0 z-50 shadow-md border-b border-white/5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20">
+            <a href="/" class="flex items-center hover:opacity-90 transition-opacity">
+                <Image src={logo} alt="BuskaTech Logo" class="h-12 w-auto" format="webp" loading="eager" />
+            </a>
+
+            <div class="hidden md:flex items-center gap-1">
+                {links.map((item) => (
+                    <a href={item.url} 
+                       class:list={[
+                           "px-4 py-2 rounded-md text-sm font-medium transition-colors",
+                           isLinkActive(item.url) ? "bg-white/10 text-brand-yellow" : "text-gray-200 hover:text-white hover:bg-white/5"
+                       ]}>
+                        {item.title}
+                    </a>
+                ))}
+            </div>
+
+            <button id="mobile-menu-button" class="md:hidden p-2 text-gray-200 hover:text-white rounded-lg">
+                <svg id="icon-open" class="h-6 w-6 block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                <svg id="icon-close" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+        </div>
+    </div>
+
+    <div id="mobile-menu" class="md:hidden hidden bg-brand-blue border-t border-white/10 shadow-inner">
+        <div class="px-4 py-4 space-y-1">
+            {links.map((item) => (
+                <a href={item.url} 
+                   class:list={[
+                       "block px-4 py-3 rounded-lg text-base font-medium",
+                       isLinkActive(item.url) ? "bg-white/10 text-brand-yellow pl-6" : "text-gray-200 hover:bg-white/5"
+                   ]}>
+                    {item.title}
+                </a>
+            ))}
+        </div>
+    </div>
+</nav>
+
+<script>
+    const button = document.getElementById("mobile-menu-button");
+    const menu = document.getElementById("mobile-menu");
+    const icons = [document.getElementById("icon-open"), document.getElementById("icon-close")];
+
+    button?.addEventListener("click", () => {
+        menu?.classList.toggle("hidden");
+        icons.forEach(icon => icon?.classList.toggle("hidden"));
+    });
+</script>

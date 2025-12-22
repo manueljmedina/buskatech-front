@@ -1,0 +1,87 @@
+---
+import { Image } from "astro:assets";
+import heroBg from "../../../assets/images/hero-bg.jpg";
+import Icon from "../../ui/Icon.astro";
+
+const heroFeatures = [
+  { title: "Rápido", icon: "fast" },
+  { title: "Seguro", icon: "secure" },
+  { title: "Sin costo", icon: "currency-dollar" },
+  { title: "Multi banco", icon: "building-library" },
+];
+---
+
+<section class="relative isolate overflow-hidden py-20 lg:py-36">
+  <!-- Background image -->
+  <div class="absolute inset-0 -z-10">
+    <Image
+      src={heroBg}
+      alt="Distrito financiero"
+      class="h-full w-full object-cover"
+      format="webp"
+      quality={80}
+      loading="eager"
+    />
+
+    <!-- Overlay -->
+    <div
+      class="absolute inset-0 bg-gradient-to-b from-brand-blue/95 via-brand-blue/90 to-brand-blue/95"
+    >
+    </div>
+  </div>
+
+  <!-- Decorative blobs -->
+  <div
+    class="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-white/5 blur-3xl"
+    aria-hidden="true"
+  >
+  </div>
+  <div
+    class="absolute -bottom-32 -right-32 h-96 w-96 rounded-full bg-brand-yellow/10 blur-3xl"
+    aria-hidden="true"
+  >
+  </div>
+
+  <!-- Content -->
+  <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+    <h1
+      class="mx-auto max-w-4xl text-4xl font-extrabold tracking-tight text-white md:text-6xl"
+    >
+      BUSKA<span class="text-brand-yellow">TECH</span> tu préstamo ideal
+      <span class="block text-brand-yellow">en minutos</span>
+    </h1>
+
+    <p
+      class="mx-auto mt-6 max-w-3xl text-lg md:text-xl text-blue-100 font-light"
+    >
+      Las mejores opciones financieras en un solo clic.
+      <br class="hidden md:block" />
+      Ahorra tiempo, compara y aplica al instante.
+    </p>
+
+    <!-- CTA -->
+    <div
+      class="mx-auto mt-10 max-w-md rounded-2xl bg-white p-6 shadow-2xl border-b-4 border-brand-yellow"
+    >
+      <a
+        href="#search-section"
+        class="btn w-full bg-brand-yellow text-brand-blue text-lg font-semibold hover:scale-[1.02] transition-transform"
+      >
+        BusKa ahora
+      </a>
+    </div>
+
+    <!-- Features -->
+    <div class="mx-auto mt-14 grid max-w-4xl grid-cols-2 gap-6 md:grid-cols-4">
+      {
+        heroFeatures.map((feature) => (
+          <div class="hero-badge">
+            <Icon name={feature.icon} class="h-7 w-7 text-brand-yellow" />
+            <span>{feature.title}</span>
+          </div>
+        ))
+      }
+      <!-- Rápido -->
+    </div>
+  </div>
+</section>

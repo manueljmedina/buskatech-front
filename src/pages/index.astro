@@ -1,0 +1,30 @@
+---
+import AllInOnePlace from "../components/pages/index/AllInOnePlace.astro";
+import CustomerOpinion from "../components/pages/index/CustomerOpinion.astro";
+import Entities from "../components/pages/index/Entities.astro";
+import Hero from "../components/pages/index/Hero.astro";
+import OurProducts from "../components/pages/index/OurProducts.astro";
+import Layout from "../layouts/Layout.astro";
+import SearchApp from "../components/Offers/SearchApp.js";
+import { api } from "../lib/api";
+
+let products = [];
+let entities = [];
+
+
+try {
+  products = await api.products();
+  entities = await api.entities();
+} catch (e) {
+  console.error(e);
+}
+---
+
+<Layout>
+	<Hero />
+	<SearchApp client:load products={products} />
+	<AllInOnePlace />
+	<Entities entities={entities}/>
+	<OurProducts products={products} />
+	<CustomerOpinion />
+</Layout>

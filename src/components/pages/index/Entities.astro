@@ -1,0 +1,72 @@
+---
+const { entities = [] } = Astro.props;
+const getInitials = (name = '') =>
+  name
+    .split(' ')
+    .filter(Boolean)
+    .slice(0, 2)
+    .map(word => word[0].toUpperCase())
+    .join('');
+---
+
+<section class="py-16 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold text-brand-blue">
+        Entidades financieras que puedes cotizar
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      {
+        entities.map((ent) => {
+          const additionalData =
+            typeof ent.additional_data === "string"
+              ? JSON.parse(ent.additional_data)
+              : ent.additional_data;
+
+          const imageUrl = additionalData?.image?.url;
+          const initials = getInitials(ent.name);
+
+          return (
+            <article
+              class="group flex flex-col items-center text-center
+                     rounded-xl bg-white p-6 shadow-sm
+                     transition-all duration-300
+                     hover:-translate-y-1 hover:shadow-md"
+            >
+              {/* Avatar */}
+              {imageUrl ? (
+                <img
+                  src={imageUrl}
+                  alt={`Logo de ${ent.name}`}
+                  loading="lazy"
+                  class="mb-4 h-20 w-20 rounded-full object-cover border"
+                />
+              ) : (
+                <div
+                  class="mb-4 h-20 w-20 
+                         flex items-center justify-center
+                         bg-brand-blue text-brand-yellow
+                         font-bold text-xl uppercase
+                         border"
+                  aria-label={`Iniciales de ${ent.name}`}
+                >
+                  {initials}
+                </div>
+              )}
+
+              <h4 class="mb-1 text-sm font-semibold text-gray-800">
+                {ent.name}
+              </h4>
+
+              <p class="text-xs leading-relaxed text-gray-500 line-clamp-3">
+                {ent.description}
+              </p>
+            </article>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>
