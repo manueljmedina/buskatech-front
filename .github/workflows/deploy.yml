@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main # Se ejecuta cada vez que subes a la rama main
+    repository_dispatch:
+    types: [deploy_from_laravel]
 
 jobs:
   build-and-deploy:
