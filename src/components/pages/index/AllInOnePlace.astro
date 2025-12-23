@@ -32,21 +32,34 @@ const features = [
 <section class="py-20 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Header -->
-        <div class="text-center max-w-3xl mx-auto mb-16">
+        <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16 px-4">
+            <!-- Eyebrow -->
             <span
                 class="flex flex-col items-center gap-2
-         text-brand-yellow font-semibold uppercase tracking-widest text-xs
-         transition-transform duration-200 hover:-translate-y-0.5"
+           text-brand-yellow font-semibold uppercase tracking-wide text-sm
+           sm:text-xs"
             >
-                <Icon name="light-bulb" class="h-10 w-10" />
+                <Icon
+                    name="light-bulb"
+                    class="h-9 w-9 sm:h-10 sm:w-10"
+                    aria-hidden="true"
+                />
                 <span>Todo en un solo lugar</span>
             </span>
+
+            <!-- Title -->
             <h2
-                class="mt-3 text-3xl md:text-4xl font-extrabold text-brand-blue"
+                class="mt-4 text-2xl sm:text-3xl md:text-4xl
+           font-extrabold text-brand-blue"
             >
                 ¿Por qué usar nuestra plataforma?
             </h2>
-            <p class="mt-4 text-gray-500 text-lg">
+
+            <!-- Description -->
+            <p
+                class="mt-4 text-base sm:text-lg
+           text-gray-700 max-w-2xl mx-auto"
+            >
                 Simplificamos el proceso de encontrar el producto financiero
                 ideal para ti. Compara, elige y aplica de forma rápida, segura y
                 transparente.

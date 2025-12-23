@@ -14,7 +14,7 @@ interface Props {
 const {
     title = "BuskaTech - Compara y solicita productos financieros",
     description = "Encuentra las mejores tasas de interés en préstamos, hipotecas y tarjetas en Panamá. Compara ofertas personalizadas en segundos.",
-    image = "/og-image.jpg",
+    image = "/logo_v1.ico",
     canonicalURL = Astro.url.href,
 } = Astro.props;
 ---
@@ -43,9 +43,7 @@ const {
         <meta property="twitter:description" content={description} />
         <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
     </head>
     <body class="bg-gray-50 text-gray-900 selection:bg-brand-yellow selection:text-brand-blue">
         <div class="min-h-screen flex flex-col">
