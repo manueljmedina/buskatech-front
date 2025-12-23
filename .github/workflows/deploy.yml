@@ -3,8 +3,9 @@ name: Despliegue a Hostinger
 on:
   push:
     branches:
-      - main # Se ejecuta cada vez que subes a la rama main
-    repository_dispatch:
+      - main
+  # 🔹 Corregido: types ahora está indentado dentro de repository_dispatch
+  repository_dispatch:
     types: [deploy_from_laravel]
 
 jobs:
@@ -26,7 +27,7 @@ jobs:
       - name: 🏗 Compilar proyecto (Build)
         run: npm run build
         env:
-          # Aquí inyectamos la variable de producción desde los secretos de GitHub
+          # Inyección de la URL de tu API de Laravel en producción
           PUBLIC_API_URL: ${{ secrets.PUBLIC_API_URL }}
 
       - name: 🚀 Subir archivos a Hostinger (FTP)
@@ -37,3 +38,5 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./dist/ 
           server-dir: ./ 
+          # 💡 Recomendado: Borra archivos viejos para evitar que se vea data anterior
+          delete-destination-append: true
